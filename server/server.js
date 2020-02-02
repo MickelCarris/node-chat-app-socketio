@@ -13,8 +13,19 @@ const io = socketIO(server);
 io.on('connection', socket => {
   console.log('New user connected');
 
+  socket.emit('newMessage', {
+    from: 'johndoe@gmail.com',
+    text: 'Hi i am john',
+    createdAt: 2233
+  });
+
   socket.on('disconnect', () => {
     console.log('client disconnected');
+  });
+
+  socket.on('createMessage', msg => {
+    msg.createdAt = new Date();
+    console.log('Message', msg);
   });
 });
 
