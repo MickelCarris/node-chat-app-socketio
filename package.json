@@ -4,7 +4,7 @@
   "description": "chat app with socketio",
   "main": "index.js",
   "scripts": {
-    "server": "node server/server.js"
+    "start": "node server/server.js"
   },
   "engines": {
     "node": "10.16.0"
