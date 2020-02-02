@@ -13,8 +13,16 @@ const io = socketIO(server);
 io.on('connection', socket => {
   console.log('New user connected');
 
-  socket.on('disconnect', () => {
-    console.log('client disconnected');
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to the chat app',
+    createdAt: new Date().getTime()
+  });
+
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New User Joined',
+    createdAt: new Date().getTime()
   });
 
   socket.on('createMessage', msg => {
@@ -24,6 +32,14 @@ io.on('connection', socket => {
       from: msg.from,
       text: msg.text,
       createdAt: new Date().getTime()
+    });
+    // socket.broadcast.emit('newMessage', {
+    //   from: msg.from,
+    //   text: msg.text,
+    //   createdAt: new Date().getTime()
+    // });
+    socket.on('disconnect', () => {
+      console.log('client disconnected');
     });
   });
 });
