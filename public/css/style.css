@@ -288,18 +288,15 @@ button:disabled {
     padding: 0;
     overflow: hidden;
   }
-  .chat__main {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
   .chat__footer {
     flex-direction: row;
     width: 100vw;
-    margin-bottom: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
   }
   .chat__footer form {
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   .chat__sidebar {
     display: none;
