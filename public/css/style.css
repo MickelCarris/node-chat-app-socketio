@@ -284,6 +284,10 @@ button:disabled {
     padding: 0;
     overflow: hidden;
   }
+  .chat__sidebar {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   .chat__footer {
     flex-direction: row;
     width: 100vw;
