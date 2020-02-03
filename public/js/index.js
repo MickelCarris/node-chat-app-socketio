@@ -8,19 +8,23 @@ socket.on('disconnect', function() {
 });
 
 socket.on('newMessage', function(msg) {
-  console.log('New Message: ', msg);
+  const formattedTime = moment(msg.createAt).format('h:mm:ss a');
   let li = $('<li></li>');
-  li.html(`<b>${msg.from}</b>: ${msg.text}`);
+  li.html(
+    `<strong style='color:orangered'>${msg.from}</strong> <i style='font-size:10px'>${formattedTime}</i> : ${msg.text} `
+  );
   li.addClass('mb-1');
   $('#messages').append(li);
 });
 
 socket.on('newLocationMessage', function(msg) {
-  console.log('New Message: ', msg);
+  const formattedTime = moment(msg.createAt).format('h:mm:ss a');
   let li = $('<li></li>');
   let a = $('<a target="_blank">My Current Location</a>');
   // a.css('font-size', '10px');
-  li.html(`<b>${msg.from}:</b> `);
+  li.html(
+    `<strong style='color:orangered'>${msg.from}</strong> <i style='font-size:10px'>${formattedTime}</i> `
+  );
   a.attr('href', msg.url);
   li.addClass('mb-1');
   li.append(a);
