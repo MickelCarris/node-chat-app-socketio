@@ -24,10 +24,11 @@ io.on('connection', socket => {
     generateMessage('Admin', 'New User Joined')
   );
 
-  socket.on('createMessage', msg => {
+  socket.on('createMessage', (msg, cb) => {
     console.log('Message', msg);
 
     io.emit('newMessage', generateMessage(msg.from, msg.text));
+    // cb('Hi');
     // socket.broadcast.emit('newMessage', {
     //   from: msg.from,
     //   text: msg.text,
