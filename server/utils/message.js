@@ -8,7 +8,7 @@ const generateMessage = (from, text) => {
 const generateLocationMessage = (from, lat, lon) => {
   return {
     from,
-    url: `http://www.google.com/maps?q=${lat},${lon}`,
+    url: `https://www.google.com/maps?q=${lat},${lon}`,
     createdAt: new Date().getTime()
   };
 };
