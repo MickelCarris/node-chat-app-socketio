@@ -228,8 +228,12 @@ button:disabled {
   color: #999;
 }
 .mb-1 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
+.mt-1 {
+  margin-top: 1rem;
+}
+
 /*
 @media (max-width: 600px) {
   * {
@@ -284,13 +288,14 @@ button:disabled {
     padding: 0;
     overflow: hidden;
   }
-  .chat__sidebar {
+  .chat__main {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
   .chat__footer {
     flex-direction: row;
     width: 100vw;
+    margin-bottom: 1rem;
   }
   .chat__sidebar {
     display: none;
