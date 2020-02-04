@@ -21,10 +21,9 @@ socket.on('connect', function() {
   let params = $.deparam(window.location.search);
   socket.emit('join', params, function(err) {
     if (err) {
-      alert(err);
       window.location.href = '/';
+      alert(err);
     } else {
-      console.log('No Error');
     }
   });
 });

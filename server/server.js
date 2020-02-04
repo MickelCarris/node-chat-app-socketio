@@ -14,18 +14,30 @@ const server = http.createServer(app); // --
 const io = socketIO(server);
 const users = new Users();
 
-io.on('connection', socket => {
-  console.log('New user connected');
+let activeRooms;
 
+io.on('connection', socket => {
+  activeRooms = users.getActiveChatRooms();
+  if (activeRooms) {
+    socket.emit('updateActiveRooms', activeRooms);
+  }
   socket.on('join', (params, callback) => {
+    let usersStack = users.getAllUsers();
+    let userFound = usersStack.find(user => user.name === params.name);
+    if (userFound) {
+      return callback(`${params.name} already exists`);
+    }
+
     if (!isRealString(params.name) || !isRealString(params.room)) {
       return callback('Name and Room is Required');
     }
-    socket.join(params.room);
-    users.removeUser(socket.id);
-    users.addUser(socket.id, params.name, params.room);
 
-    io.to(params.room).emit('updateUsersList', users.getUserList(params.room));
+    let room = params.room.toLowerCase();
+    socket.join(room);
+    users.removeUser(socket.id);
+    users.addUser(socket.id, params.name, room);
+
+    io.to(room).emit('updateUsersList', users.getUserList(room));
 
     socket.emit(
       'newMessage',
@@ -33,7 +45,7 @@ io.on('connection', socket => {
     );
 
     socket.broadcast
-      .to(params.room)
+      .to(room)
       .emit(
         'newMessage',
         generateMessage('Admin', `${params.name} has joined`)
@@ -62,13 +74,17 @@ io.on('connection', socket => {
 
   socket.on('disconnect', () => {
     let user = users.removeUser(socket.id);
-
     if (user) {
       io.to(user.room).emit('updateUsersList', users.getUserList(user.room));
       io.to(user.room).emit(
         'newMessage',
         generateMessage('Admin', `${user.name} has left`)
       );
+
+      activeRooms = users.getActiveChatRooms();
+      if (activeRooms) {
+        socket.emit('updateActiveRooms', activeRooms);
+      }
     }
   });
 });
