@@ -288,7 +288,5 @@ button:disabled {
   .chat__footer {
     flex-direction: row;
     width: 100vw;
-    position: fixed;
-    bottom: 0;
   }
 }
