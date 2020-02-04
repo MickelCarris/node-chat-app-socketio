@@ -234,7 +234,6 @@ button:disabled {
   margin-top: 1rem;
 }
 
-/*
 @media (max-width: 600px) {
   * {
     font-size: 1rem;
@@ -259,28 +258,7 @@ button:disabled {
     margin-right: 0px;
   }
 }
-@media (max-width: 375px) {
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  .chat__footer {
-    flex-direction: row;
-    width: 100vw;
-  }
-  .chat__footer input {
-    margin: 0;
-  }
-
-  .chat__footer button {
-    font-size: smaller;
-    width: 30%;
-    margin-right: 5px;
-    padding: 0.5rem 0;
-  }
-} */
+/*
 @media (max-width: 375px) {
   * {
     box-sizing: border-box;
@@ -297,5 +275,20 @@ button:disabled {
   }
   .chat__sidebar {
     display: none;
+  }
+} */
+
+@media (max-width: 375px) {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .chat__footer {
+    flex-direction: row;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
   }
 }
