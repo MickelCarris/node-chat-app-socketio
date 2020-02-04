@@ -18,11 +18,29 @@ function scrollToBottom() {
 }
 
 socket.on('connect', function() {
-  console.log('Connected to Server');
+  let params = $.deparam(window.location.search);
+  socket.emit('join', params, function(err) {
+    if (err) {
+      alert(err);
+      window.location.href = '/';
+    } else {
+      console.log('No Error');
+    }
+  });
 });
 
 socket.on('disconnect', function() {
   console.log('Disconnected from Server');
+});
+
+socket.on('updateUsersList', function(users) {
+  let ul = $('<ul></ul>');
+
+  users.forEach(user => {
+    ul.append($('<li></li>').text(user));
+  });
+
+  $('#users').html(ul);
 });
 
 socket.on('newMessage', function(msg) {
